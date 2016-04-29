@@ -12,6 +12,15 @@ Use composer to install this package:
 
 Then add the Service Provider to your app configuration
 
+```
+'providers' => [
+  ...
+  Camc\BugsnagDeploy\BugsnagDeployServiceProvider::class,
+  ...
+]
+```
+
+
 ## Usage
 
 This package provides a single artisan command:
