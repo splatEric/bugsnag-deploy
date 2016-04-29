@@ -3,7 +3,9 @@
 namespace Camc\BugsnagDeploy\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
+
+use Illuminate\Config\Repository as Config;
+use Illuminate\Foundation\Application;
 
 class Bugsnagnotify extends Command
 {
@@ -28,13 +30,19 @@ class Bugsnagnotify extends Command
 
     protected static $DEFAULT_VERSION = '0.0.1-alpha';
 
+    protected $app;
+    protected $config;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Application $application, Config $config)
     {
+        $this->app = $application;
+        $this->config = $config;
+
         parent::__construct();
     }
 
@@ -59,7 +67,7 @@ class Bugsnagnotify extends Command
     protected function getDeployEndpoint()
     {
         if (!$endpoint = $this->option('endpoint')) {
-            $endpoint = Config::get('bugsnag.endpoint') ?: \Bugsnag_Configuration::$DEFAULT_ENDPOINT;
+            $endpoint = $this->config->get('bugsnag.endpoint') ?: \Bugsnag_Configuration::$DEFAULT_ENDPOINT;
             $endpoint .= '/deploy';
         }
 
@@ -108,7 +116,7 @@ class Bugsnagnotify extends Command
 
         $config = $this->option('configAppVersion') ?: 'app.version';
 
-        return Config::get($config, self::$DEFAULT_VERSION);
+        return $this->config->get($config, self::$DEFAULT_VERSION);
     }
 
     /**
@@ -118,12 +126,12 @@ class Bugsnagnotify extends Command
      */
     public function handle()
     {
-        if (!$api_key = Config::get('bugsnag.api_key'))
+        if (!$api_key = $this->config->get('bugsnag.api_key'))
             return $this->fail('bugnsag.api_key not set');
 
         $data = [
             'apiKey' => $api_key,
-            'releaseStage' => Config::get('app.env')
+            'releaseStage' => $this->app->environment()
         ];
 
         if (!$revision = $this->option('revision'))
