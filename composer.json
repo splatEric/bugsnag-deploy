@@ -7,5 +7,10 @@
             "name": "Mike Smith",
             "email": "mike.smith@camc-ltd.co.uk"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-4": {
+            "Camc\\BugsnagDeploy\\": "src/"
+        }
+    }
 }

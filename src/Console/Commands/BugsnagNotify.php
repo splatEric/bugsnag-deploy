@@ -53,7 +53,7 @@ class Bugsnagnotify extends Command
 
     /**
      * Define the URL to POST notification for deployment
-     * 
+     *
      * @return array|string
      */
     protected function getDeployEndpoint()

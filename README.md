@@ -10,6 +10,8 @@ Use composer to install this package:
 
 `composer require camc/bugsnag-deploy`
 
+Then add the Service Provider to your app configuration
+
 ## Usage
 
 This package provides a single artisan command:
