@@ -8,9 +8,9 @@
             "email": "mike.smith@camc-ltd.co.uk"
         }
     ],
-    "requires": [
+    "requires": {
         "bugsnag/bugsnag-laravel": "1.*"
-    ],
+    },
     "autoload": {
         "psr-4": {
             "Camc\\BugsnagDeploy\\": "src/"
