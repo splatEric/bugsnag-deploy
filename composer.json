@@ -1,12 +1,15 @@
 {
     "name": "camc/bugsnag-deploy",
-    "description": "Simple package to provide artisan command to trigger deployment notifications to bugsnag",
+    "description": "Simple package to provide a Laravel 5 artisan command to trigger deployment notifications to bugsnag",
     "license": "MIT",
     "authors": [
         {
             "name": "Mike Smith",
             "email": "mike.smith@camc-ltd.co.uk"
         }
+    ],
+    "requires": [
+        "bugsnag/bugsnag-laravel": "1.*"
     ],
     "autoload": {
         "psr-4": {
